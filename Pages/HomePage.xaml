@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SystemTrayWinUI3.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Padding="20">
+        <StackPanel Spacing="12">
+
+            <TextBlock Text="SystemTray for WinUI 3"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Margin="0,0,0,10"/>
+
+            <TextBlock TextWrapping="Wrap" FontSize="16">
+                A comprehensive system tray (notification area) implementation for WinUI 3 
+                applications. Since WinUI 3 does not have built-in system tray support, this 
+                library provides a complete solution with context menus, icons, multi-language 
+                support, and window management features. It uses Win32 interop under the hood 
+                but exposes a simple, WinUI 3–friendly API to developers.
+            </TextBlock>
+
+            <TextBlock Text="Features:" FontSize="20" FontWeight="SemiBold" Margin="0,20,0,5"/>
+            <TextBlock TextWrapping="Wrap">
+                • Tray icon with left/right click support
+                <LineBreak/>
+                • Context menu with RTL language support
+                <LineBreak/>
+                • Multi-language support (English, Persian, Arabic, Urdu, Hebrew)
+                <LineBreak/>
+                • Minimize/close to tray window management
+                <LineBreak/>
+                • Dark/light theme support
+                <LineBreak/>
+                • Automatic taskbar recreation handling
+            </TextBlock>
+
+            <TextBlock Margin="0,20,0,0">
+                🔗 GitHub: 
+                <Hyperlink NavigateUri="https://github.com/MEHDIMYADI">MEHDIMYADI</Hyperlink>
+            </TextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

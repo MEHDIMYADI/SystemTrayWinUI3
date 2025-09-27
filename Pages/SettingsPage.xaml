@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SystemTrayWinUI3.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SystemTrayWinUI3.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="20">
+        <ToggleSwitch 
+            x:Name="TrayIconToggle"
+            Header="Show System Tray Icon"
+            IsOn="True"
+            Toggled="TrayIconToggle_Toggled"/>
+        
+        <ToggleSwitch 
+            x:Name="MinimizeToTrayToggle"
+            Header="Minimize to System Tray"
+            IsOn="True"
+            Toggled="MinimizeToTrayToggle_Toggled"/>
+        
+        <ToggleSwitch 
+            x:Name="CloseButtonTrayToggle"
+            Header="Close Button Minimizes to System Tray"
+            IsOn="True"
+            Toggled="CloseToMinimizesInTrayToggle_Toggled"/>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="Language:" 
+                       VerticalAlignment="Center" 
+                       Margin="0,0,10,0"/>
+            <ComboBox x:Name="LanguageComboBox"
+                      Width="150"
+                      SelectionChanged="LanguageComboBox_SelectionChanged">
+                <ComboBoxItem Content="English" Tag="en-US"/>
+                <ComboBoxItem Content="فارسی" Tag="fa-IR"/>
+                <ComboBoxItem Content="العربية" Tag="ar-SA"/>
+                <ComboBoxItem Content="اردو" Tag="ur-PK"/>
+                <ComboBoxItem Content="עברית" Tag="he-IL"/>
+            </ComboBox>
+        </StackPanel>
+    </StackPanel>
+</Page>
