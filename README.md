@@ -1,6 +1,7 @@
 ﻿# SystemTray for WinUI 3
 
 A comprehensive system tray (notification area) implementation for WinUI 3 applications. Since WinUI 3 doesn't have built-in system tray support, this library provides a complete solution with context menus, icons, and window management.
+![SystemTrayWinUI3](https://github.com/user-attachments/assets/d337e2e5-9dac-40f7-9c29-63568a88d126)
 
 ## ⚠️ Important Note
 
