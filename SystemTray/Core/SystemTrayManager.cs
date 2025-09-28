@@ -28,6 +28,7 @@ namespace SystemTray.Core
         private SystemTrayContextMenuWindow? contextMenuWindow;
         private SystemTrayContextMenuWindow.Item[] menuItems = [];
         public Action? OpenSettingsAction { get; set; }
+        public record LangPair(string Primary, string Secondary);
 
         private static readonly string[] RtlLanguages =
         [
@@ -37,17 +38,13 @@ namespace SystemTray.Core
             "he", "he-IL"
         ];
 
-        private static readonly Dictionary<string, string[]> MenuTranslations = new()
+        private static readonly Dictionary<LangPair, string[]> MenuTranslations = new()
         {
-            { "fa", new[] { "تنظیمات", "خروج" } },
-            { "fa-IR", new[] { "تنظیمات", "خروج" } },
-            { "ar", new[] { "الإعدادات", "خروج" } },
-            { "ar-SA", new[] { "الإعدادات", "خروج" } },
-            { "ur", new[] { "ترتیبات", "خروج" } },
-            { "ur-PK", new[] { "ترتیبات", "خروج" } },
-            { "he", new[] { "הגדרות", "יציאה" } },
-            { "he-IL", new[] { "הגדרות", "יציאה" } },
-            { "default", new[] { "Settings", "Exit" } }
+            [new("fa", "fa-IR")] = ["تنظیمات", "خروج"],
+            [new("ar", "ar-SA")] = ["الإعدادات", "خروج"],
+            [new("ur", "ur-PK")] = ["ترتیبات", "خروج"],
+            [new("he", "he-IL")] = ["הגדרות", "יציאה"],
+            [new("default", "default")] = ["Settings", "Exit"]
         };
 
         public bool IsIconVisible
@@ -179,8 +176,7 @@ namespace SystemTray.Core
 
         private void BuildMenuItems()
         {
-            var texts = MenuTranslations.TryGetValue(languageCode, out string[]? value)
-                ? value : MenuTranslations["default"];
+            var texts = GetMenuTexts(languageCode);
 
             menuItems =
             [
@@ -188,6 +184,19 @@ namespace SystemTray.Core
                 new SystemTrayContextMenuWindow.Item("--", null),
                 new SystemTrayContextMenuWindow.Item(texts[1], new Command(() => Application.Current.Exit()))
             ];
+        }
+
+        private static string[] GetMenuTexts(string langCode)
+        {
+            foreach (var kvp in MenuTranslations)
+            {
+                if (string.Equals(kvp.Key.Primary, langCode, StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(kvp.Key.Secondary, langCode, StringComparison.OrdinalIgnoreCase))
+                {
+                    return kvp.Value;
+                }
+            }
+            return MenuTranslations[new("default", "default")];
         }
 
         private static bool IsRtlLanguage(string languageCode)
