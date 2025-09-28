@@ -1,7 +1,4 @@
-﻿using System;
-using Windows.Foundation;
-
-// -----------------------------------------------------------------------------
+﻿// -----------------------------------------------------------------------------
 // SystemTray for WinUI 3
 // A complete system tray (notification area) implementation for WinUI 3 apps.
 //
@@ -10,10 +7,16 @@ using Windows.Foundation;
 // License: MIT
 // -----------------------------------------------------------------------------
 
+using System;
+
 namespace SystemTray.Models
 {
-    public class NotifyIconEventArgs : EventArgs
+    abstract class SystemTrayContextMenuItem
     {
-        public Rect Rect { get; init; }
+        public abstract string Text { get; set; }
+
+        public abstract bool IsEnabled { get; set; }
+
+        public EventHandler<EventArgs>? Click;
     }
 }

@@ -15,18 +15,18 @@ using SystemTray.Models;
 
 namespace SystemTray.UI
 {
-    class NotifyContextMenu : IDisposable
+    class SystemTrayContextMenu : IDisposable
     {
         private SafeMenuHandle handle;
 
         private readonly List<MenuItem> items = new();
 
-        public NotifyContextMenu()
+        public SystemTrayContextMenu()
         {
             handle = new SafeMenuHandle(CreatePopupMenu(), true);
         }
 
-        public NotifyContextMenuItem this[int index] => items[index];
+        public SystemTrayContextMenuItem this[int index] => items[index];
 
         public int Count => items.Count;
 
@@ -55,7 +55,7 @@ namespace SystemTray.UI
             }
         }
 
-        public NotifyContextMenuItem AddMenuItem(string text)
+        public SystemTrayContextMenuItem AddMenuItem(string text)
         {
             var item = new MenuItem(this)
             {
@@ -87,14 +87,14 @@ namespace SystemTray.UI
             ModifyMenu(handle, item.Id, flags, item.Id, item.Text);
         }
 
-        sealed class MenuItem : NotifyContextMenuItem
+        sealed class MenuItem : SystemTrayContextMenuItem
         {
             private static uint idCount = 100;
-            private NotifyContextMenu menu;
+            private SystemTrayContextMenu menu;
             private string text = string.Empty;
             private bool isEnabled = true;
 
-            public MenuItem(NotifyContextMenu menu)
+            public MenuItem(SystemTrayContextMenu menu)
             {
                 ArgumentNullException.ThrowIfNull(menu);
                 this.menu = menu;

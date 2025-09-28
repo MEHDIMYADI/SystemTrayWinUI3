@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 namespace SystemTray.UI
 {
-    internal class NotifyContextMenuWindow
+    internal class SystemTrayContextMenuWindow
     {
         private const uint WM_WININICHANGE = 0x001A;
         private const uint SPI_GETWORKAREA = 0x0030;
@@ -32,7 +32,7 @@ namespace SystemTray.UI
         private Window window;
         private WindowHelper helper;
 
-        public NotifyContextMenuWindow(params Item[] menuItems)
+        public SystemTrayContextMenuWindow(params Item[] menuItems)
         {
             window = new Window();
             window.Content = new ItemsControl()

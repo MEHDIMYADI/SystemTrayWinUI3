@@ -25,8 +25,8 @@ namespace SystemTray.Core
     {
         private readonly WindowHelper windowHelper;
         private SystemTrayIcon SystemTrayIcon;
-        private NotifyContextMenuWindow? contextMenuWindow;
-        private NotifyContextMenuWindow.Item[] menuItems = [];
+        private SystemTrayContextMenuWindow? contextMenuWindow;
+        private SystemTrayContextMenuWindow.Item[] menuItems = [];
         public Action? OpenSettingsAction { get; set; }
 
         private static readonly string[] RtlLanguages =
@@ -164,7 +164,7 @@ namespace SystemTray.Core
         private void InitializeContextMenu()
         {
             BuildMenuItems();
-            contextMenuWindow = new NotifyContextMenuWindow(menuItems);
+            contextMenuWindow = new SystemTrayContextMenuWindow(menuItems);
             contextMenuWindow.SetFlowDirection(IsRtlLanguage(languageCode));
         }
 
@@ -184,9 +184,9 @@ namespace SystemTray.Core
 
             menuItems =
             [
-                new NotifyContextMenuWindow.Item(texts[0], new Command(OpenSettings)),
-                new NotifyContextMenuWindow.Item("--", null),
-                new NotifyContextMenuWindow.Item(texts[1], new Command(() => Application.Current.Exit()))
+                new SystemTrayContextMenuWindow.Item(texts[0], new Command(OpenSettings)),
+                new SystemTrayContextMenuWindow.Item("--", null),
+                new SystemTrayContextMenuWindow.Item(texts[1], new Command(() => Application.Current.Exit()))
             ];
         }
 

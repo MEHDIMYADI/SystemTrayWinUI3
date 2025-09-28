@@ -149,11 +149,11 @@ private void BuildMenuItems()
 
     menuItems =
     [
-        new NotifyContextMenuWindow.Item("Custom Item", new Command(CustomAction)),
-        new NotifyContextMenuWindow.Item("--", null), // Separator
-        new NotifyContextMenuWindow.Item(texts[0], new Command(OpenSettings)),
-        new NotifyContextMenuWindow.Item("--", null),
-        new NotifyContextMenuWindow.Item(texts[1], new Command(() => Application.Current.Exit()))
+        new SystemTrayContextMenuWindow.Item("Custom Item", new Command(CustomAction)),
+        new SystemTrayContextMenuWindow.Item("--", null), // Separator
+        new SystemTrayContextMenuWindow.Item(texts[0], new Command(OpenSettings)),
+        new SystemTrayContextMenuWindow.Item("--", null),
+        new SystemTrayContextMenuWindow.Item(texts[1], new Command(() => Application.Current.Exit()))
     ];
 }
 

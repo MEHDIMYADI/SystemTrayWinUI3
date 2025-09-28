@@ -38,7 +38,7 @@ namespace SystemTray.UI
             this.windowHelper = windowHelper;
             this.keepIconAlive = keepIconAlive;
 
-            ContextMenu = new NotifyContextMenu();
+            ContextMenu = new SystemTrayContextMenu();
 
             this.windowHelper.Message += ProcessMessage;
         }
@@ -73,10 +73,10 @@ namespace SystemTray.UI
             }
         }
 
-        public NotifyContextMenu ContextMenu { get; }
+        public SystemTrayContextMenu ContextMenu { get; }
 
-        public event EventHandler<NotifyIconEventArgs>? LeftClick;
-        public event EventHandler<NotifyIconEventArgs>? RightClick;
+        public event EventHandler<SystemTrayEventArgs>? LeftClick;
+        public event EventHandler<SystemTrayEventArgs>? RightClick;
 
         public void Show()
         {
@@ -118,8 +118,8 @@ namespace SystemTray.UI
             return data;
         }
 
-        private void OnLeftClick(NotifyIconEventArgs e) => LeftClick?.Invoke(this, e);
-        private void OnRightClick(NotifyIconEventArgs e) => RightClick?.Invoke(this, e);
+        private void OnLeftClick(SystemTrayEventArgs e) => LeftClick?.Invoke(this, e);
+        private void OnRightClick(SystemTrayEventArgs e) => RightClick?.Invoke(this, e);
 
         private void Dispose(bool disposing)
         {
@@ -148,7 +148,7 @@ namespace SystemTray.UI
             switch ((int)lParam)
             {
                 case WM_LBUTTONUP:
-                    OnLeftClick(new NotifyIconEventArgs { Rect = GetIconRectangle() });
+                    OnLeftClick(new SystemTrayEventArgs { Rect = GetIconRectangle() });
                     break;
 
                 case WM_CONTEXTMENU:
@@ -156,7 +156,7 @@ namespace SystemTray.UI
                     if (RightClick == null)
                         ShowContextMenu();
                     else
-                        OnRightClick(new NotifyIconEventArgs { Rect = GetIconRectangle() });
+                        OnRightClick(new SystemTrayEventArgs { Rect = GetIconRectangle() });
                     break;
             }
         }
@@ -172,14 +172,14 @@ namespace SystemTray.UI
 
         private Rect GetIconRectangle()
         {
-            var notifyIcon = new NOTIFYICONIDENTIFIER
+            var systemTray = new NOTIFYICONIDENTIFIER
             {
                 cbSize = (uint)Marshal.SizeOf<NOTIFYICONIDENTIFIER>(),
                 hWnd = windowHelper.Handle,
                 guidItem = Id
             };
 
-            return Shell_NotifyIconGetRect(ref notifyIcon, out RECT rect) != 0
+            return Shell_NotifyIconGetRect(ref systemTray, out RECT rect) != 0
                 ? Rect.Empty
                 : new Rect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
         }
